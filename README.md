@@ -1,19 +1,49 @@
-# Batalha-Naval-n-vel-novato
-Matriz tabuleiro[10][10] → representa o oceano do jogo.  Valor 0 → indica água.  Valor 3 → indica partes de navios.  Dois loops for aninhados inicializam o tabuleiro.  Outros dois loops posicionam os navios:  Um horizontal (mesma linha, 3 colunas seguidas).  Um vertical (mesma coluna, 3 linhas seguidas). 
-Matriz tabuleiro[10][10] → representa o oceano do jogo.
+#include <stdio.h>
 
-Valor 0 → indica água.
+#define TAM 10   // Define o tamanho do tabuleiro (10x10)
+#define TAM_NAVIO 3  // Define o tamanho fixo dos navios
 
-Valor 3 → indica partes de navios.
+int main() {
+    int tabuleiro[TAM][TAM];  // Matriz que representa o tabuleiro
+    int i, j;
 
-Dois loops for aninhados inicializam o tabuleiro.
+    // 1️⃣ Inicializa o tabuleiro com 0 (representa água)
+    for (i = 0; i < TAM; i++) {
+        for (j = 0; j < TAM; j++) {
+            tabuleiro[i][j] = 0;
+        }
+    }
 
-Outros dois loops posicionam os navios:
+    // 2️⃣ Define as coordenadas iniciais dos navios
+    int linha_navio_h = 2;  // Linha do navio horizontal
+    int col_navio_h = 4;    // Coluna inicial do navio horizontal
 
-Um horizontal (mesma linha, 3 colunas seguidas).
+    int linha_navio_v = 6;  // Linha inicial do navio vertical
+    int col_navio_v = 1;    // Coluna do navio vertical
 
-Um vertical (mesma coluna, 3 linhas seguidas).
+    // 3️⃣ Posiciona o navio horizontal (valor 3)
+    for (j = col_navio_h; j < col_navio_h + TAM_NAVIO; j++) {
+        if (j < TAM)  // Garante que não ultrapasse o tabuleiro
+            tabuleiro[linha_navio_h][j] = 3;
+    }
 
-O programa valida os limites do tabuleiro (não ultrapassa 10x10).
+    // 4️⃣ Posiciona o navio vertical (valor 3)
+    for (i = linha_navio_v; i < linha_navio_v + TAM_NAVIO; i++) {
+        if (i < TAM)  // Garante que não ultrapasse o tabuleiro
+            tabuleiro[i][col_navio_v] = 3;
+    }
 
-A exibição mostra toda a matriz com separação visual.
+    // 5️⃣ Exibe o tabuleiro no console
+    printf("=== TABULEIRO BATALHA NAVAL ===\n\n");
+
+    for (i = 0; i < TAM; i++) {
+        for (j = 0; j < TAM; j++) {
+            printf("%d ", tabuleiro[i][j]); // Imprime cada posição
+        }
+        printf("\n"); // Pula linha após cada linha do tabuleiro
+    }
+
+    printf("\nLegenda: 0 = Água | 3 = Navio\n");
+
+    return 0;
+}
